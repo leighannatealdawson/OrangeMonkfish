@@ -1,36 +1,47 @@
-library(ggplot2)
-library(palmerpenguins)
-library(dplyr)
-library(ggtext)
-library(scales)
+# A silly R plot that *looks like a monkfish*
+# This uses ggplot2 shapes, polygons, and annotations to fake a monkfish silhouette.
 
-plot_fun_penguins <- function() {
-  penguins_clean <- penguins %>%
-    filter(!is.na(bill_length_mm), !is.na(flipper_length_mm), !is.na(species))
+library(ggplot2)
+library(dplyr)
+
+plot_monkfish_shape <- function() {
   
-  ggplot(penguins_clean, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) +
-    geom_point(size = 3.8, alpha = 0.85) +
-    geom_smooth(method = "loess", se = FALSE, linewidth = 1.1, linetype = "longdash") +
-    scale_color_manual(values = c("#FFB347", "#FF8C00", "#FF7F50")) +
-    scale_x_continuous(name = "Bill Length (mm)", breaks = pretty_breaks()) +
-    scale_y_continuous(name = "Flipper Length (mm)", breaks = pretty_breaks()) +
-    coord_cartesian(clip = "off") +
-    theme_minimal(base_size = 15) +
-    theme(
-      panel.grid.major = element_line(color = "grey85", linewidth = 0.3),
-      panel.grid.minor = element_blank(),
-      plot.title = element_markdown(size = 20, face = "bold", margin = margin(b = 8)),
-      plot.subtitle = element_markdown(size = 13, color = "grey30", margin = margin(b = 15)),
-      legend.position = "top",
-      legend.title = element_text(face = "bold"),
-      legend.text = element_text(size = 11)
-    ) +
-    labs(
-      title = "<span style='color:#FF8C00;'>Advanced Penguin Visualization</span>",
-      subtitle = "Relationships between **bill length** and **flipper length** for three penguin species",
-      color = "Species"
-    )
+  # Body polygon (blobby monkfish shape)
+  body <- tibble(
+    x = c(-2, -1, 0, 1.2, 1.8, 1.5, 0.5, -0.5, -1.3, -2),
+    y = c(0, 1.2, 1.6, 1.2, 0, -0.8, -1.4, -1.3, -0.6, 0)
+  )
+  
+  # Tail
+  tail <- tibble(
+    x = c(1.8, 2.4, 2.4, 1.8),
+    y = c(0.1, 0.6, -0.6, -0.1)
+  )
+  
+  # Eyes
+  eyes <- tibble(
+    x = c(-1, -0.4),
+    y = c(0.6, 0.7)
+  )
+  
+  # Teeth as small downward triangles
+  teeth <- tibble(
+    x = seq(-0.5, 0.5, length.out = 10),
+    y = rep(-0.2, 10)
+  )
+  
+  ggplot() +
+    geom_polygon(data = body, aes(x, y), fill = "#d9a066", color = "black", linewidth = 1.2) +
+    geom_polygon(data = tail, aes(x, y), fill = "#b07a44", color = "black", linewidth = 1) +
+    geom_point(data = eyes, aes(x, y), size = 6, shape = 21, fill = "white") +
+    geom_point(data = eyes, aes(x, y), size = 3) +
+    geom_point(data = teeth, aes(x, y), shape = 25, size = 3, fill = "white") +
+    annotate("text", x = 0, y = 1.9, label = "Monkfish", size = 8, family = "Comic Sans MS") +
+    coord_equal() +
+    theme_void() +
+    theme(plot.margin = margin(40,40,40,40))
 }
 
-p <- plot_fun_penguins()
+# Example:
+p <- plot_monkfish_shape()
 print(p)
