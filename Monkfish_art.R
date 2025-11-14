@@ -31,8 +31,8 @@ plot_monkfish_shape <- function() {
   )
   
   ggplot() +
-    geom_polygon(data = body, aes(x, y), fill = "orange", color = "black", linewidth = 1.2) +
-    geom_polygon(data = tail, aes(x, y), fill = "orange", color = "black", linewidth = 1) +
+    geom_polygon(data = body, aes(x, y), fill = "red", color = "black", linewidth = 1.2) +
+    geom_polygon(data = tail, aes(x, y), fill = "red", color = "black", linewidth = 1) +
     geom_point(data = eyes, aes(x, y), size = 6, shape = 21, fill = "white") +
     geom_point(data = eyes, aes(x, y), size = 3) +
     geom_point(data = teeth, aes(x, y), shape = 25, size = 3, fill = "white") +
