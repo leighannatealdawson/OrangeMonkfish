@@ -31,10 +31,10 @@ plot_monkfish_shape <- function() {
   )
   
   ggplot() +
-    geom_polygon(data = body, aes(x, y), fill = "orange", color = "black", linewidth = 1.2) +
-    geom_polygon(data = tail, aes(x, y), fill = "orange", color = "black", linewidth = 1) +
-    geom_point(data = eyes, aes(x, y), size = 6, shape = 21, fill = "white") +
-    geom_point(data = eyes, aes(x, y), size = 3) +
+    geom_polygon(data = body, aes(x, y), fill = "darkorange", color = "black", linewidth = 1.2) +
+    geom_polygon(data = tail, aes(x, y), fill = "darkorange", color = "black", linewidth = 1) +
+    geom_point(data = eyes, aes(x, y), size = 6, shape = 21, fill = "black") +
+    geom_point(data = eyes, aes(x, y), fill = "lightblue", size = 3) +
     geom_point(data = teeth, aes(x, y), shape = 25, size = 3, fill = "white") +
     annotate("text", x = 0, y = 1.9, label = "Monkfish", size = 8, family = "Comic Sans MS") +
     coord_equal() +
