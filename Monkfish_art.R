@@ -21,7 +21,7 @@ plot_monkfish_shape <- function() {
   # Eyes
   eyes <- tibble(
     x = c(-1, -0.4),
-    y = c(0.6, 0.7)
+    y = c(0.6, 0.8)
   )
   
   # Teeth as small downward triangles
